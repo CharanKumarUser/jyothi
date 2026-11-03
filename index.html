@@ -9,7 +9,7 @@
   <meta name="keywords" content="Dr N Jyothi, MBBS, General Physician, Duty Medical Officer, Kadapa, Kuppam, APMC, Andhra Pradesh">
   <meta name="author" content="Dr. N. Jyothi">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#06080f">
+  <meta name="theme-color" content="#ffffff">
 
   <meta property="og:title" content="Dr. N. Jyothi, MBBS — General Physician">
   <meta property="og:description" content="Registered Medical Practitioner (APMC/FMR/133000). General Physician & Duty Medical Officer, Andhra Pradesh.">
@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/images/dr_jyothi_hd.webp" type="image/webp">
+  <link rel="preload" as="image" href="assets/images/dr_jyothi_profile.webp" type="image/webp">
 
   <script>document.documentElement.classList.add('js');</script>
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
@@ -35,13 +35,14 @@
     "@context": "https://schema.org",
     "@type": "Physician",
     "name": "Dr. N. Jyothi",
-    "image": "https://jyothi.online/assets/images/dr_jyothi_hd.webp",
+    "image": "https://jyothi.online/assets/images/dr_jyothi_profile.webp",
     "telephone": "+919381925918",
     "email": "kiranjyothi5496@gmail.com",
     "url": "https://jyothi.online",
     "medicalSpecialty": ["GeneralPractice", "EmergencyMedicine"],
     "identifier": "APMC/FMR/133000",
     "alumniOf": { "@type": "EducationalOrganization", "name": "Government Medical College, Kadapa" },
+    "knowsLanguage": ["Telugu", "English", "Hindi", "Tamil"],
     "address": { "@type": "PostalAddress", "addressLocality": "Kuppam", "addressRegion": "Andhra Pradesh", "postalCode": "517425", "addressCountry": "IN" }
   }
   </script>
@@ -57,85 +58,72 @@
       </a>
 
       <nav class="menu" aria-label="Primary">
-        <a href="#about">About</a>
+        <a href="#about">Overview</a>
         <a href="#expertise">Expertise</a>
-        <a href="#journey">Journey</a>
+        <a href="#journey">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#cases">Cases</a>
         <a href="#contact">Contact</a>
       </nav>
 
       <div class="header-cta">
-        <a href="#contact" class="btn btn-grad btn-sm">Book Consultation</a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="sheet">
-          <i data-lucide="menu"></i>
-        </button>
+        <a href="tel:+919381925918" class="icon-link" aria-label="Call Dr. Jyothi"><i data-lucide="phone"></i></a>
+        <a href="#contact" class="btn btn-grad btn-sm">Book Appointment</a>
       </div>
     </div>
   </header>
 
-  <!-- Mobile bottom sheet -->
-  <div class="sheet-backdrop" id="sheet-backdrop"></div>
-  <div class="sheet" id="sheet" role="dialog" aria-label="Menu" aria-hidden="true">
-    <span class="sheet-handle" aria-hidden="true"></span>
-    <nav class="sheet-links">
-      <a href="#about"><i data-lucide="user-round"></i>About</a>
-      <a href="#expertise"><i data-lucide="stethoscope"></i>Expertise</a>
-      <a href="#journey"><i data-lucide="route"></i>Journey</a>
-      <a href="#skills"><i data-lucide="activity"></i>Skills</a>
-      <a href="#cases"><i data-lucide="clipboard-list"></i>Cases</a>
-      <a href="#contact"><i data-lucide="calendar-days"></i>Contact</a>
-    </nav>
-    <a href="tel:+919381925918" class="btn btn-grad btn-block"><i data-lucide="phone"></i> Call +91 93819 25918</a>
-  </div>
-
   <main>
-    <!-- ============ HERO ============ -->
+    <!-- ============ PROFILE HEADER ============ -->
     <section class="hero" id="top">
-      <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
-      <div class="dots" aria-hidden="true"></div>
+      <div class="hero-bg" aria-hidden="true"><span class="g1"></span><span class="g2"></span><span class="dots"></span></div>
 
       <div class="wrap hero-grid">
         <div class="hero-text">
+          <nav class="crumbs reveal" aria-label="Breadcrumb"><span>Doctors</span><i data-lucide="chevron-right"></i><span>General Medicine</span><i data-lucide="chevron-right"></i><b>Dr. N. Jyothi</b></nav>
+
           <span class="status reveal"><span class="live"></span>Available for consultations</span>
 
-          <h1 class="reveal">Dr. N. Jyothi <span class="degree">MBBS</span></h1>
+          <h1 class="reveal">Dr. N. Jyothi</h1>
+          <p class="quals reveal">MBBS <span>·</span> General Physician <span>·</span> Duty Medical Officer</p>
 
           <p class="role reveal">
-            <span class="role-fixed">General Physician</span>
-            <span class="role-sep">/</span>
+            <span class="role-fixed">Focused on</span>
             <span class="role-rotator" aria-live="polite">
-              <span class="is-on">Duty Medical Officer</span>
-              <span>Emergency Care</span>
+              <span class="is-on">Outpatient &amp; Family Medicine</span>
+              <span>Emergency &amp; Casualty Care</span>
               <span>Maternal &amp; Child Health</span>
             </span>
           </p>
 
-          <p class="lead reveal">
-            Registered Medical Practitioner trained at Government Medical College &amp; Hospital, Kadapa. I provide ethical, evidence-based care, from everyday outpatient consultations to golden-hour emergencies.
-          </p>
+          <ul class="quick reveal">
+            <li><i data-lucide="building-2"></i><span><small>Trained at</small>GGH &amp; GMC, Kadapa</span></li>
+            <li><i data-lucide="languages"></i><span><small>Languages</small>Telugu, English, Hindi, Tamil</span></li>
+            <li><i data-lucide="map-pin"></i><span><small>Location</small>Kuppam, Andhra Pradesh</span></li>
+          </ul>
 
           <div class="hero-actions reveal">
-            <a href="#contact" class="btn btn-grad"><i data-lucide="calendar-check"></i>Book a Consultation</a>
-            <a href="https://wa.me/919381925918" target="_blank" rel="noopener" class="btn btn-glass"><i data-lucide="message-circle"></i>WhatsApp</a>
+            <a href="#contact" class="btn btn-grad"><i data-lucide="calendar-check"></i>Book Appointment</a>
+            <a href="https://wa.me/919381925918" target="_blank" rel="noopener" class="btn btn-line"><i data-lucide="message-circle"></i>WhatsApp</a>
           </div>
 
           <div class="reg reveal">
             <span class="reg-icon"><i data-lucide="shield-check"></i></span>
             <span class="reg-body">
-              <small>Andhra Pradesh Medical Council · Reg. No.</small>
+              <small>Andhra Pradesh Medical Council · Registration No.</small>
               <b>APMC/FMR/133000</b>
             </span>
+            <span class="reg-badge"><i data-lucide="badge-check"></i>Verified</span>
             <button class="reg-copy" data-copy="APMC/FMR/133000" aria-label="Copy registration number"><i data-lucide="copy"></i></button>
           </div>
         </div>
 
         <div class="hero-photo reveal">
-          <div class="photo-glow" aria-hidden="true"></div>
+          <div class="photo-disc" aria-hidden="true"></div>
           <div class="orbit" aria-hidden="true"><span></span></div>
-          <img src="assets/images/dr_jyothi_hd.webp" alt="Dr. N. Jyothi, MBBS" width="1000" height="1180" fetchpriority="high">
-          <div class="chip chip-a"><i data-lucide="graduation-cap"></i><span><b>MBBS</b> GMC Kadapa</span></div>
-          <div class="chip chip-b"><i data-lucide="users-round"></i><span><b>35–45</b> patients / day</span></div>
+          <img src="assets/images/dr_jyothi_profile.webp" alt="Dr. N. Jyothi, MBBS" width="1100" height="1298" fetchpriority="high">
+          <div class="chip chip-a"><span class="chip-ic"><i data-lucide="graduation-cap"></i></span><span><b>MBBS</b><small>GMC Kadapa</small></span></div>
+          <div class="chip chip-b"><span class="chip-ic"><i data-lucide="users-round"></i></span><span><b>35–45</b><small>patients / day</small></span></div>
         </div>
       </div>
 
@@ -149,11 +137,11 @@
       </div>
     </section>
 
-    <!-- ============ ABOUT ============ -->
+    <!-- ============ OVERVIEW ============ -->
     <section class="section" id="about">
       <div class="wrap about">
         <div class="about-l">
-          <span class="kicker reveal">About</span>
+          <span class="kicker reveal">Overview</span>
           <h2 class="reveal">Medicine practised with <span class="grad">precision</span>, delivered with <span class="grad">kindness</span>.</h2>
           <p class="quote reveal">“Rational prescribing, rapid triage in the golden hour, and clear, respectful conversations with every patient and family.”</p>
         </div>
@@ -174,11 +162,11 @@
     </section>
 
     <!-- ============ EXPERTISE ============ -->
-    <section class="section" id="expertise">
+    <section class="section alt" id="expertise">
       <div class="wrap">
         <div class="head reveal">
           <span class="kicker">Expertise</span>
-          <h2>Areas of clinical care</h2>
+          <h2>Conditions treated &amp; areas of care</h2>
           <p>Hands-on experience across emergency, inpatient, surgical, maternal and diagnostic care.</p>
         </div>
 
@@ -193,7 +181,7 @@
             <div class="x-top"><span class="x-icon"><i data-lucide="heart-pulse"></i></span><span class="x-stat">500+ ECG/ABG</span></div>
             <h3>General Medicine &amp; ICU</h3>
             <p>Ward rounds, ICU monitoring and management of metabolic and infectious illness.</p>
-            <ul class="tags"><li>DKA</li><li>Hypertensive crisis</li><li>Sepsis</li><li>COPD / Asthma</li></ul>
+            <ul class="tags"><li>Diabetes / DKA</li><li>Hypertension</li><li>Sepsis</li><li>COPD / Asthma</li></ul>
           </article>
           <article class="x-card reveal">
             <div class="x-top"><span class="x-icon"><i data-lucide="scissors"></i></span><span class="x-stat">120+ done</span></div>
@@ -223,12 +211,12 @@
       </div>
     </section>
 
-    <!-- ============ JOURNEY ============ -->
+    <!-- ============ EXPERIENCE ============ -->
     <section class="section" id="journey">
       <div class="wrap">
         <div class="head reveal">
-          <span class="kicker">Journey</span>
-          <h2>Training &amp; experience</h2>
+          <span class="kicker">Experience &amp; education</span>
+          <h2>Training &amp; clinical experience</h2>
           <p>From medical school to front-line practice.</p>
         </div>
 
@@ -266,7 +254,7 @@
     </section>
 
     <!-- ============ SKILLS ============ -->
-    <section class="section" id="skills">
+    <section class="section alt" id="skills">
       <div class="wrap">
         <div class="head reveal">
           <span class="kicker">Skills</span>
@@ -346,11 +334,11 @@
     </section>
 
     <!-- ============ CONTACT ============ -->
-    <section class="section" id="contact">
+    <section class="section alt" id="contact">
       <div class="wrap">
         <div class="contact reveal">
           <div class="contact-l">
-            <span class="kicker">Contact</span>
+            <span class="kicker">Appointments</span>
             <h2>Book a consultation</h2>
             <p>Outpatient visits, hospital duty coverage and second opinions in Andhra Pradesh.</p>
 
@@ -400,7 +388,7 @@
         <p>Registered Medical Practitioner · APMC/FMR/133000</p>
       </div>
       <nav>
-        <a href="#about">About</a><a href="#expertise">Expertise</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+        <a href="#about">Overview</a><a href="#expertise">Expertise</a><a href="#journey">Experience</a><a href="#contact">Contact</a>
       </nav>
     </div>
     <div class="wrap footer-base">
@@ -409,8 +397,17 @@
     </div>
   </footer>
 
+  <!-- ============ MOBILE BOTTOM TAB BAR ============ -->
+  <nav class="tabbar" aria-label="Mobile navigation">
+    <a href="#top" class="active"><i data-lucide="house"></i><span>Home</span></a>
+    <a href="#about"><i data-lucide="user-round"></i><span>About</span></a>
+    <a href="#expertise"><i data-lucide="stethoscope"></i><span>Expertise</span></a>
+    <a href="#journey"><i data-lucide="route"></i><span>Experience</span></a>
+    <a href="#contact"><i data-lucide="calendar-days"></i><span>Book</span></a>
+  </nav>
+
   <a href="https://wa.me/919381925918?text=Hello%20Dr.%20Jyothi%2C%20I%20found%20you%20on%20jyothi.online" target="_blank" rel="noopener" class="wa-fab" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.34-.2-3.56.93.95-3.47-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.23-9.43 9.43-9.43 2.52 0 4.89.98 6.67 2.77a9.36 9.36 0 0 1 2.76 6.67c0 5.2-4.23 9.43-9.44 9.43zm8.03-17.46A11.27 11.27 0 0 0 12.05.7C5.79.7.7 5.79.7 12.04c0 2 .52 3.95 1.52 5.67L.6 23.6l6.03-1.58a11.33 11.33 0 0 0 5.42 1.38h.01c6.25 0 11.34-5.09 11.35-11.34 0-3.03-1.18-5.88-3.33-8.02z"/></svg>
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.34-.2-3.56.93.95-3.47-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.23-9.430 9.43-9.43 2.52 0 4.89.98 6.67 2.77a9.36 9.36 0 0 1 2.76 6.67c0 5.2-4.23 9.43-9.44 9.43zm8.03-17.46A11.27 11.27 0 0 0 12.05.7C5.79.7.7 5.79.7 12.04c0 2 .52 3.95 1.52 5.67L.6 23.6l6.03-1.58a11.33 11.33 0 0 0 5.42 1.38h.01c6.25 0 11.34-5.09 11.35-11.34 0-3.03-1.18-5.88-3.33-8.02z"/></svg>
   </a>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>

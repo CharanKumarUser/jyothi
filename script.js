@@ -29,30 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2800);
   }
 
-  /* Scroll spy */
+  /* Scroll spy: desktop menu + mobile bottom tab bar */
   const links = $$('.menu a');
+  const barLinks = $$('.tabbar a');
+  // Sections without their own tab highlight the nearest related tab
+  const tabFor = { top: 'top', about: 'about', expertise: 'expertise', skills: 'expertise', journey: 'journey', cases: 'journey', contact: 'contact' };
   const spy = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
-      if (e.isIntersecting) links.forEach((l) => l.classList.toggle('active', l.getAttribute('href') === `#${e.target.id}`));
+      if (!e.isIntersecting) return;
+      const id = e.target.id;
+      links.forEach((l) => l.classList.toggle('active', l.getAttribute('href') === `#${id}`));
+      const t = tabFor[id];
+      if (t) barLinks.forEach((l) => l.classList.toggle('active', l.getAttribute('href') === `#${t}`));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
   $$('main section[id]').forEach((s) => spy.observe(s));
-
-  /* Mobile bottom sheet */
-  const sheet = $('#sheet');
-  const backdrop = $('#sheet-backdrop');
-  const toggle = $('#menu-toggle');
-  const setSheet = (open) => {
-    sheet?.classList.toggle('open', open);
-    backdrop?.classList.toggle('open', open);
-    sheet?.setAttribute('aria-hidden', String(!open));
-    toggle?.setAttribute('aria-expanded', String(open));
-    document.body.style.overflow = open ? 'hidden' : '';
-  };
-  toggle?.addEventListener('click', () => setSheet(!sheet?.classList.contains('open')));
-  backdrop?.addEventListener('click', () => setSheet(false));
-  $$('#sheet a').forEach((a) => a.addEventListener('click', () => setSheet(false)));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSheet(false); });
 
   /* Reveal + meters */
   $$('.meter').forEach((m) => m.style.setProperty('--v', m.dataset.v || 0));
