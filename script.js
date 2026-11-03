@@ -1,466 +1,330 @@
 /* ==========================================================================
-   DR. N. JYOTHI, MBBS — MODERN LUXURY MEDICAL PORTFOLIO
-   Interactive Client Engine
+   Dr. N. Jyothi, MBBS — "The Clinical Dossier" interactions
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Lucide Icons if available
-  if (window.lucide) {
-    window.lucide.createIcons();
-  }
+  const $ = (s, root = document) => root.querySelector(s);
+  const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ------------------------------------------------------------------------
-     1. THEME SWITCHER (LIGHT / DARK) WITH PERSISTENCE
-     ------------------------------------------------------------------------ */
-  const themeToggleBtn = document.getElementById('theme-toggle-btn');
-  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-  const savedTheme = localStorage.getItem('theme');
+  if (window.lucide) window.lucide.createIcons();
+  const yearEl = $('#year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const setTheme = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    const sunIcon = themeToggleBtn?.querySelector('.sun-icon');
-    const moonIcon = themeToggleBtn?.querySelector('.moon-icon');
-    if (sunIcon && moonIcon) {
-      if (theme === 'dark') {
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
-      } else {
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-      }
-    }
-  };
-
-  if (savedTheme) {
-    setTheme(savedTheme);
-  } else if (prefersDarkScheme.matches) {
-    setTheme('dark');
-  } else {
-    setTheme('light');
-  }
-
-  themeToggleBtn?.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
+  /* ---------- Theme ---------- */
+  $('#theme-toggle-btn')?.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
   });
 
-  /* ------------------------------------------------------------------------
-     2. DYNAMIC ROTATING TEXT (HERO ROLES)
-     ------------------------------------------------------------------------ */
+  /* ---------- Typing roles ---------- */
   const roles = [
-    "General Physician & Clinician",
-    "Emergency & Casualty Medical Officer",
-    "Inpatient & Intensive Care Physician",
-    "Minor Surgical & Wound Care Practitioner",
-    "Maternal & Child Health Care Advocate"
+    'General Physician',
+    'Duty Medical Officer',
+    'Emergency & Casualty Clinician',
+    'Inpatient & ICU Physician',
+    'Maternal & Child Health Advocate'
   ];
-  const roleElement = document.getElementById('dynamic-role');
-  let roleIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  let typeSpeed = 80;
-
-  function typeRoleEffect() {
-    if (!roleElement) return;
-    const currentRole = roles[roleIndex];
-    if (isDeleting) {
-      roleElement.textContent = currentRole.substring(0, charIndex - 1);
-      charIndex--;
-      typeSpeed = 40;
-    } else {
-      roleElement.textContent = currentRole.substring(0, charIndex + 1);
-      charIndex++;
-      typeSpeed = 80;
-    }
-
-    if (!isDeleting && charIndex === currentRole.length) {
-      isDeleting = true;
-      typeSpeed = 1800; // pause at end
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      roleIndex = (roleIndex + 1) % roles.length;
-      typeSpeed = 400; // pause before next
-    }
-
-    setTimeout(typeRoleEffect, typeSpeed);
-  }
-  typeRoleEffect();
-
-  /* ------------------------------------------------------------------------
-     3. STICKY HEADER & SCROLL SPY & BACK TO TOP
-     ------------------------------------------------------------------------ */
-  const header = document.querySelector('.main-header');
-  const backToTopBtn = document.getElementById('back-to-top');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section[id]');
-
-  window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY;
-
-    // Header shadow
-    if (scrollPos > 30) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
-    }
-
-    // Back to top button
-    if (scrollPos > 400) {
-      backToTopBtn?.classList.add('visible');
-    } else {
-      backToTopBtn?.classList.remove('visible');
-    }
-
-    // Scroll spy navigation highlight
-    sections.forEach(section => {
-      const top = section.offsetTop - 120;
-      const height = section.offsetHeight;
-      const id = section.getAttribute('id');
-
-      if (scrollPos >= top && scrollPos < top + height) {
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          }
-        });
-      }
-    });
-  });
-
-  backToTopBtn?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  /* ------------------------------------------------------------------------
-     4. MOBILE DRAWER NAVIGATION
-     ------------------------------------------------------------------------ */
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const mobileDrawer = document.getElementById('mobile-drawer');
-  const drawerBackdrop = document.getElementById('drawer-backdrop');
-  const drawerClose = document.getElementById('drawer-close');
-  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-  const openDrawer = () => {
-    mobileDrawer?.classList.add('active');
-    drawerBackdrop?.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeDrawer = () => {
-    mobileDrawer?.classList.remove('active');
-    drawerBackdrop?.classList.remove('active');
-    document.body.style.overflow = '';
-  };
-
-  mobileToggle?.addEventListener('click', openDrawer);
-  drawerClose?.addEventListener('click', closeDrawer);
-  drawerBackdrop?.addEventListener('click', closeDrawer);
-
-  mobileNavLinks.forEach(link => {
-    link.addEventListener('click', closeDrawer);
-  });
-
-  /* ------------------------------------------------------------------------
-     5. STATS ANIMATED COUNTER (INTERSECTION OBSERVER)
-     ------------------------------------------------------------------------ */
-  const statNumbers = document.querySelectorAll('.count-up');
-  let statsCounted = false;
-
-  const countUpObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !statsCounted) {
-        statsCounted = true;
-        statNumbers.forEach(stat => {
-          const target = parseInt(stat.getAttribute('data-target') || '0', 10);
-          const duration = 1800;
-          const stepTime = 20;
-          const steps = duration / stepTime;
-          const increment = target / steps;
-          let current = 0;
-
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              stat.textContent = target.toLocaleString();
-              clearInterval(timer);
-            } else {
-              stat.textContent = Math.floor(current).toLocaleString();
-            }
-          }, stepTime);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-
-  const metricsSection = document.querySelector('.hero-metrics');
-  if (metricsSection) {
-    countUpObserver.observe(metricsSection);
+  const roleEl = $('#dynamic-role');
+  if (roleEl && !reduceMotion) {
+    let r = 0, c = roles[0].length, deleting = false;
+    const tick = () => {
+      const word = roles[r];
+      c += deleting ? -1 : 1;
+      roleEl.textContent = word.slice(0, c);
+      let delay = deleting ? 35 : 70;
+      if (!deleting && c === word.length) { deleting = true; delay = 2200; }
+      else if (deleting && c === 0) { deleting = false; r = (r + 1) % roles.length; delay = 350; }
+      setTimeout(tick, delay);
+    };
+    setTimeout(() => { deleting = true; tick(); }, 2600);
   }
 
-  /* ------------------------------------------------------------------------
-     6. CLINICAL SKILL PROGRESS BARS (ANIMATE ON VIEW)
-     ------------------------------------------------------------------------ */
-  const skillBars = document.querySelectorAll('.progress-fill');
-  const skillsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar = entry.target;
-        const width = bar.getAttribute('data-pct') || '0%';
-        bar.style.width = width;
-      }
-    });
-  }, { threshold: 0.2 });
-
-  skillBars.forEach(bar => skillsObserver.observe(bar));
-
-  /* ------------------------------------------------------------------------
-     7. SPECIALTIES FILTER TABS (DYNAMIC ARRANGEMENT)
-     ------------------------------------------------------------------------ */
-  const specialtyTabs = document.querySelectorAll('.filter-tab');
-  const specialtyCards = document.querySelectorAll('.specialty-card');
-
-  specialtyTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      specialtyTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const filterValue = tab.getAttribute('data-filter');
-
-      specialtyCards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        if (filterValue === 'all' || category === filterValue) {
-          card.classList.remove('hide');
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(15px)';
-          setTimeout(() => {
-            card.style.transition = 'all 0.3s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, 40);
-        } else {
-          card.classList.add('hide');
-        }
-      });
-    });
+  /* ---------- Monitor waveforms ---------- */
+  const wavePeriod = {
+    ecg: (x0) => `L${x0 + 40} 24 Q${x0 + 48} 18 ${x0 + 56} 24 L${x0 + 70} 24 L${x0 + 74} 28 L${x0 + 80} 4 L${x0 + 86} 36 L${x0 + 90} 24 L${x0 + 110} 24 Q${x0 + 124} 14 ${x0 + 138} 24 L${x0 + 200} 24`,
+    pleth: (x0) => `L${x0 + 30} 30 C${x0 + 50} 30 ${x0 + 58} 6 ${x0 + 72} 6 C${x0 + 86} 6 ${x0 + 92} 20 ${x0 + 100} 22 C${x0 + 106} 24 ${x0 + 110} 16 ${x0 + 118} 18 C${x0 + 140} 22 ${x0 + 170} 30 ${x0 + 200} 30`,
+    resp: (x0) => `C${x0 + 50} 6 ${x0 + 50} 6 ${x0 + 100} 20 C${x0 + 150} 34 ${x0 + 150} 34 ${x0 + 200} 20`,
+    abp: (x0) => `L${x0 + 40} 32 C${x0 + 52} 32 ${x0 + 56} 6 ${x0 + 66} 6 C${x0 + 76} 6 ${x0 + 80} 18 ${x0 + 86} 20 L${x0 + 90} 17 C${x0 + 100} 20 ${x0 + 150} 32 ${x0 + 200} 32`
+  };
+  $$('.wave').forEach((svg) => {
+    const fn = wavePeriod[svg.dataset.type] || wavePeriod.ecg;
+    const startY = svg.dataset.type === 'resp' ? 20 : svg.dataset.type === 'ecg' ? 24 : svg.dataset.type === 'pleth' ? 30 : 32;
+    let d = `M0 ${startY} `;
+    for (let i = 0; i < 3; i++) d += fn(i * 200) + ' ';
+    svg.querySelector('path')?.setAttribute('d', d.trim());
   });
 
-  /* ------------------------------------------------------------------------
-     8. VERIFIED CERTIFICATES GALLERY FILTER & LIGHTBOX MODAL
-     ------------------------------------------------------------------------ */
-  const certFilterBtns = document.querySelectorAll('.cert-filter-btn');
-  const certCards = document.querySelectorAll('.certificate-card');
-  const lightboxModal = document.getElementById('cert-lightbox');
-  const lightboxClose = document.getElementById('lightbox-close');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxTitle = document.getElementById('lightbox-title');
-  const lightboxAuthority = document.getElementById('lightbox-authority');
-  const lightboxReg = document.getElementById('lightbox-reg');
-  const lightboxDate = document.getElementById('lightbox-date');
-  const lightboxStatus = document.getElementById('lightbox-status');
-  const lightboxDownloadBtn = document.getElementById('lightbox-download-pdf');
+  /* ---------- Header, progress, back-to-top ---------- */
+  const header = $('#site-header');
+  const progress = $('#scroll-progress-bar');
+  const backTop = $('#back-to-top');
+  let ticking = false;
+  const onScroll = () => {
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    header?.classList.toggle('scrolled', y > 20);
+    backTop?.classList.toggle('visible', y > 700);
+    if (progress) progress.style.width = `${max > 0 ? (y / max) * 100 : 0}%`;
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+  onScroll();
+  backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // Certificate filtering
-  certFilterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      certFilterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-filter');
-      certCards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
-          card.classList.remove('hide');
-        } else {
-          card.classList.add('hide');
-        }
-      });
+  /* ---------- Scroll spy (top nav + side index) ---------- */
+  const navLinks = $$('.nav-link');
+  const sideLinks = $$('.side-index a');
+  const sideIndex = $('.side-index');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const id = `#${e.target.id}`;
+      navLinks.forEach((l) => l.classList.toggle('active', l.getAttribute('href') === id));
+      sideLinks.forEach((l) => l.classList.toggle('active', l.getAttribute('href') === id));
+      sideIndex?.classList.toggle('on-dark', e.target.id === 'contact');
     });
-  });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  $$('main section[id]').forEach((s) => spy.observe(s));
 
-  // Certificate Lightbox Details Data
+  /* ---------- Mobile menu ---------- */
+  const overlay = $('#mobile-drawer');
+  const toggle = $('#mobile-toggle');
+  const setMenu = (open) => {
+    overlay?.classList.toggle('active', open);
+    overlay?.setAttribute('aria-hidden', String(!open));
+    header?.classList.toggle('menu-open', open);
+    toggle?.setAttribute('aria-expanded', String(open));
+    toggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  toggle?.addEventListener('click', () => setMenu(!overlay?.classList.contains('active')));
+  $$('.drawer-link, .menu-foot a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  window.addEventListener('resize', () => { if (window.innerWidth > 1060) setMenu(false); });
+
+  /* ---------- Reveal on scroll ---------- */
+  const reveals = $$('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    reveals.forEach((el) => el.classList.add('in'));
+  } else {
+    const groups = new Map();
+    reveals.forEach((el) => {
+      const p = el.parentElement;
+      const i = groups.get(p) || 0;
+      el.style.setProperty('--d', `${Math.min(i * 0.07, 0.35)}s`);
+      groups.set(p, i + 1);
+    });
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach((el) => ro.observe(el));
+  }
+
+  /* ---------- Count-up ---------- */
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.target || '0', 10);
+    if (reduceMotion) { el.textContent = target.toLocaleString(); return; }
+    const dur = 1800, start = performance.now();
+    const step = (now) => {
+      const t = Math.min((now - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - t, 4))).toLocaleString();
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const co = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { animateCount(e.target); co.unobserve(e.target); } });
+  }, { threshold: 0.6 });
+  $$('.count-up').forEach((c) => co.observe(c));
+
+  /* ---------- Department directory / accordion ---------- */
+  const deptBtns = $$('.dept-btn');
+  const mobileDir = window.matchMedia('(max-width: 900px)');
+  deptBtns.forEach((btn) => btn.addEventListener('click', () => {
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    const wasActive = btn.classList.contains('active');
+    deptBtns.forEach((b) => {
+      b.classList.remove('active');
+      b.setAttribute('aria-expanded', 'false');
+      document.getElementById(b.getAttribute('aria-controls'))?.classList.remove('active');
+    });
+    if (wasActive && mobileDir.matches) return; // allow closing on mobile
+    btn.classList.add('active');
+    btn.setAttribute('aria-expanded', 'true');
+    panel?.classList.add('active');
+  }));
+
+  /* ---------- Certificate data ---------- */
   const certificateData = {
-    "apmc": {
-      title: "Permanent Medical Council Registration",
-      authority: "Andhra Pradesh Medical Council (APMC)",
-      regNo: "APMC/FMR/133000",
-      date: "27th August 2024",
-      status: "Verified & Active State Practitioner",
-      image: "assets/certificates/Andhra_Pradesh_Medical_Council_Permanent_Registration.png",
-      pdf: "assets/docs/certificates/Andhra_Pradesh_Medical_Council_Permanent_Registration.pdf"
+    apmc: {
+      title: 'Permanent Medical Council Registration',
+      authority: 'Andhra Pradesh Medical Council (APMC)',
+      regNo: 'APMC/FMR/133000', date: '27 August 2024',
+      status: 'Verified · Active State Practitioner',
+      image: 'assets/certificates/Andhra_Pradesh_Medical_Council_Permanent_Registration.webp',
+      pdf: 'assets/docs/certificates/Andhra_Pradesh_Medical_Council_Permanent_Registration.pdf'
     },
-    "mbbs": {
-      title: "Bachelor of Medicine & Bachelor of Surgery (M.B.B.S.)",
-      authority: "Dr. YSR University of Health Sciences, Andhra Pradesh",
-      regNo: "University Reg: 18M101018087",
-      date: "Certified 2024 (Batch 2018 - 2023)",
-      status: "First-Class Clinical Pass (62.57% Aggregate)",
-      image: "assets/certificates/MBBS_Degree_Certificate_Dr_YSR_University.png",
-      pdf: "assets/docs/certificates/MBBS_Degree_Certificate_Dr_YSR_University.pdf"
+    mbbs: {
+      title: 'Bachelor of Medicine & Bachelor of Surgery (M.B.B.S.)',
+      authority: 'Dr. YSR University of Health Sciences, Andhra Pradesh',
+      regNo: '18M101018087', date: 'Batch 2018 – 2023',
+      status: 'Verified · 62.57% Aggregate',
+      image: 'assets/certificates/MBBS_Degree_Certificate_Dr_YSR_University.webp',
+      pdf: 'assets/docs/certificates/MBBS_Degree_Certificate_Dr_YSR_University.pdf'
     },
-    "inicet": {
-      title: "Institute of National Importance Combined Entrance Test (INICET)",
-      authority: "All India Institute of Medical Sciences (AIIMS), New Delhi",
-      regNo: "Candidate ID: 3323833292",
-      date: "July 2026 Session",
-      status: "National MD/MS Examination Confirmed",
-      image: "assets/certificates/AIIMS_INICET_Summary_Slip.png",
-      pdf: "assets/docs/certificates/AIIMS_INICET_Summary_Slip.pdf"
+    inicet: {
+      title: 'INI Combined Entrance Test (INICET)',
+      authority: 'All India Institute of Medical Sciences (AIIMS), New Delhi',
+      regNo: 'Candidate ID 3323833292', date: 'July 2026 Session',
+      status: 'Verified · National MD/MS Examination',
+      image: 'assets/certificates/AIIMS_INICET_Summary_Slip.webp',
+      pdf: 'assets/docs/certificates/AIIMS_INICET_Summary_Slip.pdf'
     },
-    "aiims-admit": {
-      title: "AIIMS National Entrance Examination Admit Card",
-      authority: "AIIMS Examination Section, Ansari Nagar, New Delhi",
-      regNo: "Roll No: 8079789",
-      date: "16th May 2026",
-      status: "Verified Examination Candidate",
-      image: "assets/certificates/AIIMS_Admit_Card.png",
-      pdf: "assets/docs/certificates/AIIMS_Admit_Card.pdf"
+    'aiims-admit': {
+      title: 'AIIMS Entrance Examination Admit Card',
+      authority: 'AIIMS Examination Section, Ansari Nagar, New Delhi',
+      regNo: 'Roll No 8079789', date: '16 May 2026',
+      status: 'Verified · Examination Candidate',
+      image: 'assets/certificates/AIIMS_Admit_Card.webp',
+      pdf: 'assets/docs/certificates/AIIMS_Admit_Card.pdf'
     },
-    "neet-pg": {
-      title: "National Eligibility cum Entrance Test (NEET-PG)",
-      authority: "National Board of Examinations in Medical Sciences (NBEMS)",
-      regNo: "Application Confirmation",
-      date: "National PG Session 2024",
-      status: "Verified Post-Graduate Medical Application",
-      image: "assets/certificates/NEET_PG_Application_Confirmation.png",
-      pdf: "assets/docs/certificates/NEET_PG_Application_Confirmation.pdf"
+    'neet-pg': {
+      title: 'National Eligibility cum Entrance Test (NEET-PG)',
+      authority: 'National Board of Examinations in Medical Sciences (NBEMS)',
+      regNo: 'Application Confirmation', date: 'National PG Session 2024',
+      status: 'Verified · PG Medical Application',
+      image: 'assets/certificates/NEET_PG_Application_Confirmation.webp',
+      pdf: 'assets/docs/certificates/NEET_PG_Application_Confirmation.pdf'
     },
-    "nativity": {
-      title: "Community, Nativity & Date of Birth Certificate",
-      authority: "Revenue Department, Government of Andhra Pradesh",
-      regNo: "Tahsildar Certified",
-      date: "Official Government Record",
-      status: "State Authorized Identity & Nativity Verification",
-      image: "assets/certificates/Community_Nativity_DateOfBirth_Certificate.png",
-      pdf: "assets/docs/certificates/Community_Nativity_DateOfBirth_Certificate.pdf"
+    nativity: {
+      title: 'Community, Nativity & Date of Birth Certificate',
+      authority: 'Revenue Department, Government of Andhra Pradesh',
+      regNo: 'Tahsildar Certified', date: 'Official Government Record',
+      status: 'Verified · State Identity Record',
+      image: 'assets/certificates/Community_Nativity_DateOfBirth_Certificate.webp',
+      pdf: 'assets/docs/certificates/Community_Nativity_DateOfBirth_Certificate.pdf'
     }
   };
 
-  certCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const certKey = card.getAttribute('data-cert-id');
-      const data = certificateData[certKey];
-      if (!data) return;
+  /* ---------- Document vault ---------- */
+  const vaultItems = $$('.vault-item');
+  const vaultImg = $('#vault-img');
+  const vaultFrame = $('#vault-open');
+  let currentCert = 'apmc';
+  vaultItems.forEach((item, i) => item.addEventListener('click', () => {
+    const id = item.dataset.certId;
+    if (id === currentCert) { openLightbox(id); return; }
+    currentCert = id;
+    vaultItems.forEach((v) => { v.classList.toggle('active', v === item); v.setAttribute('aria-selected', String(v === item)); });
+    $('#vault-status').textContent = certificateData[id].status;
+    $('#vault-index').textContent = String(i + 1).padStart(2, '0');
+    vaultFrame?.classList.add('swap');
+    const next = new Image();
+    next.onload = () => {
+      vaultImg.src = item.dataset.thumb;
+      vaultImg.alt = `${certificateData[id].title} preview`;
+      requestAnimationFrame(() => vaultFrame?.classList.remove('swap'));
+    };
+    next.src = item.dataset.thumb;
+    if (mobileDir.matches) vaultFrame?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }));
+  vaultFrame?.addEventListener('click', () => openLightbox(currentCert));
 
-      if (lightboxImg) lightboxImg.src = data.image;
-      if (lightboxTitle) lightboxTitle.textContent = data.title;
-      if (lightboxAuthority) lightboxAuthority.textContent = data.authority;
-      if (lightboxReg) lightboxReg.textContent = data.regNo;
-      if (lightboxDate) lightboxDate.textContent = data.date;
-      if (lightboxStatus) lightboxStatus.textContent = data.status;
-      if (lightboxDownloadBtn) lightboxDownloadBtn.href = data.pdf;
-
-      lightboxModal?.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
+  /* ---------- Lightbox ---------- */
+  const lightbox = $('#cert-lightbox');
+  let lastFocus = null;
+  function openLightbox(key) {
+    const d = certificateData[key];
+    if (!d || !lightbox) return;
+    const img = $('#lightbox-img');
+    img.src = d.image;
+    img.alt = d.title;
+    $('#lightbox-title').textContent = d.title;
+    $('#lightbox-authority').textContent = d.authority;
+    $('#lightbox-reg').textContent = d.regNo;
+    $('#lightbox-date').textContent = d.date;
+    $('#lightbox-status').textContent = d.status;
+    $('#lightbox-download-pdf').href = d.pdf;
+    lastFocus = document.activeElement;
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    $('#lightbox-close')?.focus();
+  }
   const closeLightbox = () => {
-    lightboxModal?.classList.remove('active');
+    if (!lightbox?.classList.contains('active')) return;
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    lastFocus?.focus();
   };
-
-  lightboxClose?.addEventListener('click', closeLightbox);
-  lightboxModal?.addEventListener('click', (e) => {
-    if (e.target === lightboxModal) closeLightbox();
-  });
-
+  $('#lightbox-close')?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightboxModal?.classList.contains('active')) {
-      closeLightbox();
-    }
+    if (e.key === 'Escape') { closeLightbox(); setMenu(false); }
   });
 
-  /* ------------------------------------------------------------------------
-     9. TOAST NOTIFICATION UTILITY
-     ------------------------------------------------------------------------ */
-  const toast = document.getElementById('toast-notice');
-  const toastMessage = document.getElementById('toast-message');
-
-  const showToast = (message) => {
-    if (!toast || !toastMessage) return;
-    toastMessage.textContent = message;
+  /* ---------- Toast & copy ---------- */
+  const toast = $('#toast-notice');
+  const toastMsg = $('#toast-message');
+  let toastTimer;
+  const showToast = (msg) => {
+    if (!toast || !toastMsg) return;
+    toastMsg.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3200);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
   };
-
-  /* ------------------------------------------------------------------------
-     10. COPY TO CLIPBOARD BUTTONS
-     ------------------------------------------------------------------------ */
-  const copyButtons = document.querySelectorAll('[data-copy]');
-  copyButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const textToCopy = btn.getAttribute('data-copy');
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          showToast(`Copied to clipboard: ${textToCopy}`);
-        }).catch(() => {
-          showToast(`Selected: ${textToCopy}`);
-        });
-      }
-    });
-  });
-
-  /* ------------------------------------------------------------------------
-     11. APPOINTMENT / CONSULTATION BOOKING FORM
-     ------------------------------------------------------------------------ */
-  const bookingForm = document.getElementById('consultation-form');
-  const whatsappBookBtn = document.getElementById('book-via-whatsapp');
-
-  bookingForm?.addEventListener('submit', (e) => {
+  $$('[data-copy]').forEach((btn) => btn.addEventListener('click', (e) => {
     e.preventDefault();
+    e.stopPropagation();
+    const text = btn.dataset.copy;
+    navigator.clipboard?.writeText(text)
+      .then(() => showToast(`Copied: ${text}`))
+      .catch(() => showToast(text));
+  }));
 
-    const name = document.getElementById('patient-name')?.value;
-    const phone = document.getElementById('patient-phone')?.value;
-    const email = document.getElementById('patient-email')?.value || 'Not provided';
-    const type = document.getElementById('consultation-type')?.value;
-    const date = document.getElementById('appointment-date')?.value || 'Earliest available';
-    const notes = document.getElementById('clinical-notes')?.value || 'No additional notes';
+  /* ---------- Consultation form ---------- */
+  const form = $('#consultation-form');
+  const val = (id) => ($(`#${id}`)?.value || '').trim();
+  const validate = () => {
+    let ok = true;
+    ['patient-name', 'patient-phone'].forEach((id) => {
+      const bad = !val(id);
+      $(`#${id}`)?.closest('.rx-field')?.classList.toggle('invalid', bad);
+      if (bad) ok = false;
+    });
+    if (!ok) showToast('Please add your name and phone number.');
+    return ok;
+  };
+  $$('#consultation-form input').forEach((i) => i.addEventListener('input', () => i.closest('.rx-field')?.classList.remove('invalid')));
 
-    if (!name || !phone || !type) {
-      showToast('Please fill in Name, Phone, and Consultation Type.');
-      return;
-    }
-
-    // Construct mailto link
-    const subject = encodeURIComponent(`Clinical Consultation Request: ${name} (${type})`);
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+    const subject = encodeURIComponent(`Consultation Request: ${val('patient-name')} (${val('consultation-type')})`);
     const body = encodeURIComponent(
-      `Hello Dr. N. Jyothi,\n\n` +
-      `I would like to request a clinical consultation / appointment.\n\n` +
-      `• Patient / Hospital Contact: ${name}\n` +
-      `• Phone: ${phone}\n` +
-      `• Email: ${email}\n` +
-      `• Consultation Type: ${type}\n` +
-      `• Preferred Date: ${date}\n` +
-      `• Clinical Details / Notes: ${notes}\n\n` +
-      `Sent via jyothi.online portfolio`
+      'Hello Dr. N. Jyothi,\n\nI would like to request a consultation.\n\n' +
+      `• Name: ${val('patient-name')}\n` +
+      `• Phone: ${val('patient-phone')}\n` +
+      `• Email: ${val('patient-email') || 'Not provided'}\n` +
+      `• Consultation type: ${val('consultation-type')}\n` +
+      `• Preferred date: ${val('appointment-date') || 'Earliest available'}\n` +
+      `• Details: ${val('clinical-notes') || '—'}\n\n` +
+      'Sent via jyothi.online'
     );
-
-    showToast('Redirecting to your email client to send request...');
+    showToast('Opening your email app…');
     window.location.href = `mailto:kiranjyothi5496@gmail.com?subject=${subject}&body=${body}`;
   });
 
-  whatsappBookBtn?.addEventListener('click', () => {
-    const name = document.getElementById('patient-name')?.value;
-    const phone = document.getElementById('patient-phone')?.value;
-    const type = document.getElementById('consultation-type')?.value;
-    const date = document.getElementById('appointment-date')?.value || 'Earliest available';
-    const notes = document.getElementById('clinical-notes')?.value || 'General consultation request';
-
-    let message = `Hello Dr. Jyothi, I am reaching out from your portfolio (jyothi.online).`;
-    if (name) message += `\nName: ${name}`;
-    if (phone) message += `\nPhone: ${phone}`;
-    if (type) message += `\nRequirement: ${type}`;
-    if (date) message += `\nPreferred Date: ${date}`;
-    if (notes) message += `\nNotes: ${notes}`;
-
-    const waUrl = `https://wa.me/919381925918?text=${encodeURIComponent(message)}`;
-    window.open(waUrl, '_blank');
+  $('#book-via-whatsapp')?.addEventListener('click', () => {
+    let msg = 'Hello Dr. Jyothi, I am reaching out from your portfolio (jyothi.online).';
+    if (val('patient-name')) msg += `\nName: ${val('patient-name')}`;
+    if (val('patient-phone')) msg += `\nPhone: ${val('patient-phone')}`;
+    msg += `\nRequirement: ${val('consultation-type')}`;
+    msg += `\nPreferred date: ${val('appointment-date') || 'Earliest available'}`;
+    if (val('clinical-notes')) msg += `\nNotes: ${val('clinical-notes')}`;
+    window.open(`https://wa.me/919381925918?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   });
-
 });
