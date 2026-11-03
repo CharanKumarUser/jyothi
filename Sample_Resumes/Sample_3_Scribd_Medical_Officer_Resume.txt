@@ -1,0 +1,53 @@
+================================================================================
+SAMPLE 3: DETAILED CLINICAL CV FORMAT (Scribd / Residency / JR Format)
+Used for Academic, Residency, and Government Hospital Junior Residency Applications
+================================================================================
+
+CURRICULUM VITAE
+
+DR. [FULL NAME], MBBS
+Permanent Medical Registration: [State Council] - [Reg No]
+Address: [Full Postal Address]
+Phone: +91 XXXXXXXXXX | Email: [doctor@domain.com]
+
+1. PERSONAL INFORMATION
+   • Date of Birth: [DD/MM/YYYY]
+   • Nationality: Indian
+   • Languages: English, Telugu, Hindi
+
+2. PROFESSIONAL PROFILE
+   MBBS graduate with demonstrated clinical competence and hands-on exposure across
+   tertiary inpatient, outpatient, and casualty departments. Trained extensively in
+   clinical diagnosis, routine medical procedures, trauma management, and maternal-child
+   healthcare. Dedicated to delivering compassionate, patient-centered care.
+
+3. EDUCATION & QUALIFICATIONS
+   • Bachelor of Medicine & Bachelor of Surgery (MBBS)
+     [Medical College], [University] | Batch: [XXXX - XXXX]
+     Aggregate: [XX]% | Distinction in [Subjects]
+   • Intermediate / Class 12: [College], [Board] | [Year] | [XX]%
+   • Class 10 / SSC: [School], [Board] | [Year] | [XX]%
+
+4. COMPULSORY ROTATORY RESIDENTIAL INTERNSHIP (CRRI)
+   Institution: [Teaching Hospital] | Duration: 12 Months
+   Departmental Postings:
+   - General Medicine & ICU (2 Months): Inpatient care, chronic illness, critical care
+   - General Surgery & Ortho (2 Months): Pre/post-op care, minor procedures, fracture casting
+   - Obstetrics & Gynaecology (2 Months): Labour room, ANC/PNC, C-section assistance
+   - Paediatrics & NICU (1.5 Months): Well-baby clinic, pediatric acute care, immunizations
+   - Casualty & Emergency (2 Months): Poly-trauma, shock, acute poisoning, cardiac arrest
+   - Community Medicine (2 Months): Rural PHC/CHC postings, school health screenings
+   - Ophthalmology & ENT (1.5 Months): Eye screening, foreign body removal, epistaxis
+
+5. CLINICAL COMPETENCIES
+   - Life support: CPR, Bag & Mask, BLS
+   - Minor operative: Suturing, I&D, debridement
+   - Bedside: IV line, NG tube, Catheter, ABG
+   - Diagnostics: ECG, Chest X-Ray, Lab panels
+
+6. PROFESSIONAL REGISTRATION
+   - Permanent Registered Medical Practitioner under National Medical Commission (NMC)
+   - State Medical Council Reg No: [XXXXXX]
+
+7. HOBBIES & EXTRACURRICULAR ACTIVITIES
+   - Medical journal reading, health camps, badminton, community service.

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dr. N. Jyothi - Medical Resume</title>
+<style>
+  @page {
+    size: A4;
+    margin: 9mm 13mm 8mm 13mm;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Calibri', 'Arial', 'Helvetica Neue', sans-serif;
+    color: #111827;
+    background-color: #ffffff;
+    font-size: 8.9pt;
+    line-height: 1.28;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 7px;
+    padding-bottom: 5px;
+    border-bottom: 1.5px solid #1e293b;
+  }
+
+  .name {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+
+  .subheading {
+    font-size: 9.8pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 3px;
+  }
+
+  .contact-bar {
+    font-size: 8.5pt;
+    color: #334155;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0 6px;
+  }
+
+  .separator {
+    color: #94a3b8;
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 6.5px;
+  }
+
+  .section-title {
+    font-size: 9.8pt;
+    font-weight: bold;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 1.5px;
+    margin-bottom: 4px;
+  }
+
+  /* PROFILE SUMMARY */
+  .summary-text {
+    font-size: 8.7pt;
+    text-align: justify;
+    line-height: 1.32;
+    color: #1f2937;
+  }
+
+  /* ENTRIES (Education, Experience, Internship) */
+  .entry {
+    margin-bottom: 4px;
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 9pt;
+  }
+
+  .entry-title {
+    font-weight: bold;
+    color: #0f172a;
+  }
+
+  .entry-date {
+    font-weight: bold;
+    color: #1f2937;
+    font-size: 8.5pt;
+    white-space: nowrap;
+  }
+
+  .entry-subtitle {
+    font-size: 8.6pt;
+    color: #374151;
+    margin-bottom: 1.5px;
+  }
+
+  /* BULLETS */
+  ul.bullets {
+    margin-left: 15px;
+    padding-left: 0;
+    list-style-type: disc;
+  }
+
+  ul.bullets li {
+    font-size: 8.5pt;
+    line-height: 1.28;
+    color: #1f2937;
+    margin-bottom: 1.8px;
+    text-align: justify;
+  }
+
+  ul.bullets li strong {
+    color: #0f172a;
+  }
+
+  /* SKILLS TABLE / GRID */
+  .skills-container {
+    display: table;
+    width: 100%;
+    font-size: 8.5pt;
+    line-height: 1.28;
+  }
+
+  .skill-row {
+    display: table-row;
+  }
+
+  .skill-label {
+    display: table-cell;
+    font-weight: bold;
+    color: #0f172a;
+    width: 25%;
+    padding-bottom: 2.5px;
+    vertical-align: top;
+  }
+
+  .skill-desc {
+    display: table-cell;
+    color: #1f2937;
+    padding-bottom: 2.5px;
+    vertical-align: top;
+  }
+
+  /* ONE-LINE ITEMS */
+  .info-line {
+    font-size: 8.5pt;
+    color: #1f2937;
+    margin-bottom: 2px;
+    line-height: 1.28;
+  }
+
+  .info-line strong {
+    color: #0f172a;
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="name">DR. N. JYOTHI</div>
+    <div class="subheading">MBBS &nbsp;|&nbsp; Registered Medical Practitioner (APMC) &nbsp;|&nbsp; General Physician</div>
+    <div class="contact-bar">
+      <span>kiranjyothi5496@gmail.com</span>
+      <span class="separator">|</span>
+      <span>+91 9381925918, +91 9392640169</span>
+      <span class="separator">|</span>
+      <span>Kuppam, Andhra Pradesh - 517425</span>
+      <span class="separator">|</span>
+      <span><strong>APMC Reg. No:</strong> APMC/FMR/133000</span>
+    </div>
+  </div>
+
+  <!-- PROFILE SUMMARY -->
+  <div class="section">
+    <div class="section-title">Profile Summary</div>
+    <div class="summary-text">
+      Clinically skilled and dedicated Registered Medical Practitioner (MBBS, APMC Reg. No: APMC/FMR/133000) trained at Government Medical College & Hospital, Kadapa. Completed an intensive 1-year Compulsory Rotatory Medical Internship (CRMI) across high-volume tertiary casualty, medical/surgical ICUs, labor suites, and primary health outreach centers. Experienced in acute emergency triage, trauma resuscitation (BLS/ACLS protocols), inpatient ward rounds, diagnostic evaluations, and minor surgical interventions. Possesses strong diagnostic acumen, rational drug prescribing habits, and excellent patient communication skills committed to delivering ethical, evidence-based clinical care.
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Bachelor of Medicine and Bachelor of Surgery (M.B.B.S.)</span>
+        <span class="entry-date">2018 – 2023</span>
+      </div>
+      <div class="entry-subtitle">
+        Government Medical College, Kadapa | Dr. YSR University of Health Sciences, Andhra Pradesh
+      </div>
+      <div class="info-line" style="font-size: 8.3pt; color: #374151;">
+        University Regd. No: 18M101018087 &nbsp;|&nbsp; <strong>Aggregate Marks: 62.57% (1533 / 2450)</strong> &nbsp;|&nbsp; Final MBBS Professional: <strong>64.76%</strong>
+      </div>
+    </div>
+
+    <div class="entry" style="margin-bottom: 1.5px;">
+      <div class="entry-header">
+        <span class="entry-title">Intermediate (Bi.P.C - Biology, Physics, Chemistry)</span>
+        <span class="entry-date">2016 – 2018</span>
+      </div>
+      <div class="entry-subtitle">Board of Intermediate Education, Andhra Pradesh</div>
+    </div>
+
+    <div class="entry" style="margin-bottom: 0;">
+      <div class="entry-header">
+        <span class="entry-title">Secondary School Certificate (Class X - SSC)</span>
+        <span class="entry-date">2016</span>
+      </div>
+      <div class="entry-subtitle">Board of Secondary Education, Andhra Pradesh</div>
+    </div>
+  </div>
+
+  <!-- MEDICAL INTERNSHIP (CRMI) -->
+  <div class="section">
+    <div class="section-title">Medical Internship (CRMI)</div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Compulsory Rotatory Medical Intern</span>
+        <span class="entry-date">Feb 2023 – Feb 2024</span>
+      </div>
+      <div class="entry-subtitle">Government General Hospital (GGH) & Govt. Medical College, Kadapa (Full 365 Days Certified)</div>
+      <ul class="bullets">
+        <li><strong>Casualty & Emergency Medicine:</strong> Managed acute emergency triage and primary resuscitation for 40+ patients per shift; handled polytrauma, stroke, acute coronary syndrome (STEMI), snakebites, organophosphate poisoning, and executed BLS/ACLS protocols.</li>
+        <li><strong>General Medicine & ICU:</strong> Conducted inpatient ward rounds and ICU monitoring for critically ill patients with diabetic ketoacidosis, septic shock, pneumonia, and hepatic/renal failure; evaluated 500+ ECGs and arterial blood gas (ABG) panels.</li>
+        <li><strong>General Surgery:</strong> Assisted in 50+ major surgical procedures (laparotomies, appendectomies, hernioplasties); independently performed 120+ minor surgical procedures including wound debridement, primary suturing, and abscess incision & drainage (I&D).</li>
+        <li><strong>Obstetrics & Gynaecology:</strong> Independently conducted 70+ normal spontaneous vaginal deliveries; performed episiotomies and perineal tear repairs; assisted in 40+ Caesarean sections (LSCS) and managed high-risk antenatal/postnatal care.</li>
+        <li><strong>Paediatrics & Neonatal Care:</strong> Evaluated acute pediatric admissions (gastroenteritis, broncho-pneumonia, febrile seizures); assisted in NICU with phototherapy and preterm management; administered childhood immunizations.</li>
+        <li><strong>Community Medicine & Rural Health:</strong> Posted at Rural Health Training Centre (RHTC) and Urban Health Training Centre (UHTC); organized clinical outreach camps, non-communicable disease screening, and immunization drives.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CLINICAL EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Clinical Experience</div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">General Physician / Duty Medical Officer (DMO)</span>
+        <span class="entry-date">Feb 2024 – Present</span>
+      </div>
+      <div class="entry-subtitle">Outpatient & Emergency Clinical Practice | Andhra Pradesh</div>
+      <ul class="bullets">
+        <li>Conducting outpatient clinical consultations, evaluating 35-45 patients daily presenting with acute infectious diseases, hypertension, diabetes mellitus, gastrointestinal disorders, and seasonal illnesses.</li>
+        <li>Directing early stabilization for hypertensive crises, acute asthma exacerbations, glycemic emergencies, and coordinating specialist referrals.</li>
+        <li>Prescribing rational pharmacotherapy and antibiotic regimens following Indian Council of Medical Research (ICMR) treatment guidelines.</li>
+        <li>Performing routine bedside minor procedures including wound suturing, laceration dressings, catheter insertions, and counseling patients.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CLINICAL SKILLS & PROCEDURAL COMPETENCIES -->
+  <div class="section">
+    <div class="section-title">Clinical Skills & Procedural Competencies</div>
+    <div class="skills-container">
+      <div class="skill-row">
+        <div class="skill-label">Emergency & Life Support:</div>
+        <div class="skill-desc">Basic Life Support (BLS), CPR, adult & pediatric bag-valve-mask ventilation, endotracheal intubation assistance, acute trauma triage, shock management.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">Bedside Clinical Procedures:</div>
+        <div class="skill-desc">Peripheral IV cannulation, arterial blood gas (ABG) sampling, Foley catheterization, nasogastric (Ryle's) tube placement, lumbar puncture, paracentesis assistance.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">Minor Surgery & Wound Care:</div>
+        <div class="skill-desc">Primary wound debridement, surgical suturing (simple interrupted, mattress), incision & drainage (I&D) of abscesses, burn management, aseptic dressings.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">Diagnostic Interpretation:</div>
+        <div class="skill-desc">12-Lead ECG interpretation, Chest & Abdominal X-ray assessment, ABG acid-base analysis, CBC, electrolytes, LFT, RFT profile evaluation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTRATION & CERTIFICATIONS -->
+  <div class="section">
+    <div class="section-title">Registration & Certifications</div>
+    <div class="info-line">
+      • <strong>Permanent Medical Registration:</strong> Andhra Pradesh Medical Council (APMC Reg. No: <strong>APMC/FMR/133000</strong>, Registered: 27-08-2024).
+    </div>
+    <div class="info-line">
+      • <strong>Life Support & Protocols:</strong> Trained in Basic Life Support (BLS) and Advanced Cardiac Life Support (ACLS) guidelines.
+    </div>
+    <div class="info-line">
+      • <strong>Clinical Compliance:</strong> Certified in Bio-Medical Waste (BMW) Management and Hospital Infection Prevention & Control (IPC).
+    </div>
+  </div>
+
+  <!-- LANGUAGES KNOWN & HOBBIES -->
+  <div class="section" style="margin-bottom: 0;">
+    <div class="section-title">Languages Known & Interests</div>
+    <div class="info-line">
+      <strong>Languages Known:</strong> English (Professional Proficiency), Telugu (Native & Clinical Fluency), Hindi (Working Proficiency), Tamil (Conversational).
+    </div>
+    <div class="info-line">
+      <strong>Hobbies & Interests:</strong> Reading Medical & Clinical Journals, Community Health Outreach & Volunteering, Badminton, Classical Music.
+    </div>
+  </div>
+
+</body>
+</html>
